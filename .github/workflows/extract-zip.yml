@@ -1,0 +1,53 @@
+name: Extract ZIP
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract ZIP files
+        shell: bash
+        run: |
+          set -e
+
+          found=false
+
+          while IFS= read -r -d '' zipfile; do
+            found=true
+
+            echo "Extracting: $zipfile"
+            unzip -o "$zipfile" -d "$(dirname "$zipfile")"
+
+            echo "Removing: $zipfile"
+            rm -f "$zipfile"
+          done < <(find . -type f -name "*.zip" -print0)
+
+          if [ "$found" = false ]; then
+            echo "Tidak ada file ZIP ditemukan."
+          else
+            echo "Semua ZIP berhasil diekstrak dan dihapus."
+          fi
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "Tidak ada perubahan."
+            exit 0
+          fi
+
+          git commit -m "Extract ZIP files"
+          git push origin HEAD:main
