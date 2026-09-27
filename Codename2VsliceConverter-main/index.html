@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chart Converter · Codename to V-Slice</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="app">
+
+  <header class="top-bar">
+    <div class="top-bar-icon">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h13"/><path d="m14 3 4 4-4 4"/><path d="M20 17H7"/><path d="m10 21-4-4 4-4"/></svg>
+    </div>
+    <div>
+      <h1>Chart Converter</h1>
+      <p>Codename Engine → V-Slice · Android</p>
+    </div>
+  </header>
+
+  <!-- ============ TAB: MAIN ============ -->
+  <div class="tab-panel active" id="tab-main">
+    <section class="card">
+      <h2 class="card-title"><span class="icon-chip"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7z"/></svg></span> Input Files</h2>
+      <p class="card-subtitle">Chart is required, the rest are optional</p>
+
+      <div class="file-field">
+        <label class="file-trigger" for="chartFile">
+          <span class="file-trigger-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5"/></svg></span>
+          <span class="file-trigger-text">
+            <span class="file-label">1 · Chart File (.json)</span>
+            <span class="file-name" id="chartFileName">No file selected</span>
+          </span>
+          <span class="chevron">›</span>
+        </label>
+        <input type="file" id="chartFile" accept=".json" hidden>
+      </div>
+
+      <div class="file-field">
+        <label class="file-trigger" for="eventsFile">
+          <span class="file-trigger-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 8l10 5 10-5-10-5Z"/><path d="m2 13 10 5 10-5"/></svg></span>
+          <span class="file-trigger-text">
+            <span class="file-label">2 · Events File (.json) · Optional</span>
+            <span class="file-name" id="eventsFileName">No file selected</span>
+          </span>
+          <span class="chevron">›</span>
+        </label>
+        <input type="file" id="eventsFile" accept=".json" hidden>
+      </div>
+
+      <div class="file-field">
+        <label class="file-trigger" for="hscriptFile">
+          <span class="file-trigger-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 8-4 4 4 4"/><path d="m15 8 4 4-4 4"/></svg></span>
+          <span class="file-trigger-text">
+            <span class="file-label">4 · HScript (.hsc/.hscript/.txt) · Optional</span>
+            <span class="file-name" id="hscriptFileName">No file selected</span>
+          </span>
+          <span class="chevron">›</span>
+        </label>
+        <input type="file" id="hscriptFile" accept=".hsc,.hscript,.txt" hidden>
+      </div>
+
+      <div class="text-field">
+        <label for="initialBpm">3 · Initial BPM</label>
+        <input type="number" id="initialBpm" value="130">
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ TAB: ADVANCED SETTING ============ -->
+  <div class="tab-panel" id="tab-advanced">
+    <section class="card">
+      <h2 class="card-title"><span class="icon-chip"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h9M17 6h3M4 12h3M9 12h11M4 18h13M19 18h1"/><circle cx="15" cy="6" r="1.6"/><circle cx="7" cy="12" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg></span> Value &amp; Multiplier</h2>
+      <p class="card-subtitle">Adjust the conversion weight for each effect</p>
+
+      <div class="field-grid">
+        <div class="text-field">
+          <label>Default Stage Zoom</label>
+          <input type="number" id="defaultStageZoom" value="0.4" step="0.01">
+        </div>
+        <div class="text-field">
+          <label>Zoom Duration Mult</label>
+          <input type="number" id="zoomDurMult" value="1.0" step="0.01">
+        </div>
+        <div class="text-field">
+          <label>Bloom Multiplier</label>
+          <input type="number" id="bloomMult" value="0.9" step="0.01">
+        </div>
+        <div class="text-field">
+          <label>Saturation Multiplier</label>
+          <input type="number" id="saturationMult" value="1.0" step="0.01">
+        </div>
+        <div class="text-field">
+          <label>Vignette Multiplier</label>
+          <input type="number" id="vignetteMult" value="1.0" step="0.01">
+        </div>
+        <div class="text-field">
+          <label>Cinematic Bar Size Mult</label>
+          <input type="number" id="cinematicBarMult" value="1.03" step="0.01">
+        </div>
+        <div class="text-field">
+          <label>Screen Cover Duration Mult</label>
+          <input type="number" id="screenCoverMult" value="1.0" step="0.01">
+        </div>
+        <div class="text-field">
+          <label>Flash Duration Mult</label>
+          <input type="number" id="flashDurMult" value="1.0" step="0.01">
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-header-row" id="excludeHeader" title="Tap to toggle all events">
+        <div class="section-header-text">
+          <h2 class="card-title"><span class="icon-chip"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4 10-10"/></svg></span> Processed Events</h2>
+          <p class="card-subtitle">Tap this title to toggle all · <span id="excludeCount">0/14</span> active</p>
+        </div>
+        <span class="toggle-all-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v14"/><path d="m5 14 3 3 3-3"/><path d="M16 21V7"/><path d="m13 10 3-3 3 3"/></svg> Toggle All</span>
+      </div>
+
+      <div class="switch-grid" id="switchGrid">
+        <label class="md-switch"><input type="checkbox" class="event-toggle" value="Scroll Speed Change" checked><span class="track"><span class="thumb"></span></span><span class="switch-label">Scroll Speed</span></label>
+        <label class="md-switch"><input type="checkbox" class="event-toggle" value="Camera Movement" checked><span class="track"><span class="thumb"></span></span><span class="switch-label">Camera Movement</span></label>
+        <label class="md-switch"><input type="checkbox" class="event-toggle" value="Add Camera Zoom" checked><span class="track"><span class="thumb"></span></span><span class="switch-label">Add Camera Zoom</span></label>
+        <label class="md-switch"><input type="checkbox" class="event-toggle" value="Set Default Cam Zoom" checked><span class="track"><span class="thumb"></span></span><span class="switch-label">Default Camera Zoom</span></label>
+        <label class="md-switch"><input type="checkbox" class="event-toggle" value="Change Stage Zoom" checked><span class="track"><span class="thumb"></span></span><span class="switch-label">Stage Zoom</span></label>
+        <label class="md-switch"><input type="checkbox" class="event-toggle" value="Camera Modulo Change" checked><span class="track"><span class="thumb"></span></span><span class="switch-label">Camera Bop / Modulo</span></label>
+        <label class="md-switch"><input type="checkbox" class="event-toggle" value="Camera Speed" checked><span class="track"><span class="thumb"></span></span><span class="switch-label">Camera Speed</span></label>
+        <label class="md-switch"><input type="checkbox" class="event-toggle" value="Cinematic Bars" checked><span class="track"><span class="thumb"></span></span><span class="switch-label">Cinematic Bars</span></label>
+        <label class="md-switch"><input type="checkbox" class="event-toggle" value="Saturation Effect" checked><span class="track"><span class="thumb"></span></span><span class="switch-label">Saturation Effect</span></label>
+        <label class="md-switch"><input type="checkbox" class="event-toggle" value="Screen Vignette" checked><span class="track"><span class="thumb"></span></span><span class="switch-label">Screen Vignette</span></label>
+        <label class="md-switch"><input type="checkbox" class="event-toggle" value="Bloom Effect" checked><span class="track"><span class="thumb"></span></span><span class="switch-label">Bloom Effect</span></label>
+        <label class="md-switch"><input type="checkbox" class="event-toggle" value="Change HUD Alpha" checked><span class="track"><span class="thumb"></span></span><span class="switch-label">Change HUD Alpha</span></label>
+        <label class="md-switch"><input type="checkbox" class="event-toggle" value="Change Character" checked><span class="track"><span class="thumb"></span></span><span class="switch-label">Change Character</span></label>
+        <label class="md-switch"><input type="checkbox" class="event-toggle" value="Lyrics" checked><span class="track"><span class="thumb"></span></span><span class="switch-label">Lyrics</span></label>
+        <label class="md-switch"><input type="checkbox" class="event-toggle" value="HScript" checked><span class="track"><span class="thumb"></span></span><span class="switch-label">HScript Camera Speed</span></label>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-header-row" id="noteTypeHeader" title="Tap to toggle all note types">
+        <div class="section-header-text">
+          <h2 class="card-title"><span class="icon-chip"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span> Note Types</h2>
+          <p class="card-subtitle">Auto-detected from the selected chart · <span id="noteTypeCount">0/0</span> active</p>
+        </div>
+        <span class="toggle-all-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v14"/><path d="m5 14 3 3 3-3"/><path d="M16 21V7"/><path d="m13 10 3-3 3 3"/></svg> Toggle All</span>
+      </div>
+
+      <p class="card-subtitle" style="padding-left:0;margin:0 0 10px 0;">When a notetype below is turned off, its notes should:</p>
+      <div class="segmented-control" id="noteTypeBehaviorControl">
+        <label class="segment active">
+          <input type="radio" name="noteTypeBehavior" value="remove" checked>
+          <span>Remove the note</span>
+        </label>
+        <label class="segment">
+          <input type="radio" name="noteTypeBehavior" value="normal">
+          <span>Keep as Normal note</span>
+        </label>
+      </div>
+
+      <div class="switch-grid" id="noteTypeSwitchGrid">
+        <p class="card-subtitle" style="padding-left:0;margin:0;">Select a chart file in the Main tab to detect its note types.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ TAB: INFO ============ -->
+  <div class="tab-panel" id="tab-info">
+    <section class="card">
+      <h2 class="card-title"><span class="icon-chip"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-5"/><circle cx="12" cy="8" r=".5" fill="currentColor"/></svg></span> About This App</h2>
+      <p class="card-subtitle">Chart Converter · Codename Engine → V-Slice</p>
+
+      <div class="info-row"><div class="k">Function</div><div class="v">Converts a Codename Engine chart (.json) into V-Slice chart format, including camera events, screen effects, and lyrics conversion.</div></div>
+      <div class="info-row"><div class="k">Output format</div><div class="v">V-Slice Chart Format 2.0.0</div></div>
+      <div class="info-row"><div class="k">Supported input</div><div class="v">Chart (.json), additional Events (.json), HScript (.hsc/.hscript/.txt)</div></div>
+      <div class="info-row"><div class="k">Settings</div><div class="v">Per-effect multipliers and per-event active/inactive toggles, all in the Advanced Setting tab.</div></div>
+      <div class="info-row"><div class="k">Note Types</div><div class="v">Detected automatically once a chart file is selected. Turn off any notetype in the Advanced Setting tab, and choose whether those notes get removed entirely or kept as plain Normal notes.</div></div>
+
+      <div class="chip-list">
+        <span class="info-chip">Scroll Speed</span>
+        <span class="info-chip">Camera Movement</span>
+        <span class="info-chip">Stage Zoom</span>
+        <span class="info-chip">Bloom</span>
+        <span class="info-chip">Saturation</span>
+        <span class="info-chip">Vignette</span>
+        <span class="info-chip">Cinematic Bars</span>
+        <span class="info-chip">HUD Alpha</span>
+        <span class="info-chip">Lyrics</span>
+        <span class="info-chip">HScript</span>
+      </div>
+
+      <div class="info-note">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-5"/><circle cx="12" cy="8" r=".5" fill="currentColor"/></svg>
+        <span>All conversion happens directly on your device in the browser — no files are ever uploaded to any server.</span>
+      </div>
+    </section>
+  </div>
+
+</div>
+
+<div class="fab-bar">
+  <button class="fab-button" id="convertBtn">
+    <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+    Convert &amp; Download
+  </button>
+</div>
+
+<nav class="bottom-nav">
+  <button class="nav-item active" data-tab="tab-main">
+    <span class="nav-icon-wrap"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-7 9 7"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg></span>
+    Main
+  </button>
+  <button class="nav-item" data-tab="tab-advanced">
+    <span class="nav-icon-wrap"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.04 1.56V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 9 19.36a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.64 15a1.7 1.7 0 0 0-1.56-1.04H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.64 9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.64a1.7 1.7 0 0 0 1.04-1.56V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1.04 1.56 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.36 9a1.7 1.7 0 0 0 1.56 1.04H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.56 1.04z"/></svg></span>
+    <span class="neon-text">Advanced Setting</span>
+  </button>
+  <button class="nav-item" data-tab="tab-info">
+    <span class="nav-icon-wrap"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-5"/><circle cx="12" cy="8" r=".5" fill="currentColor"/></svg></span>
+    Info
+  </button>
+</nav>
+
+<div id="status" class="snackbar"></div>
+
+  <script src="js/converter.js" defer></script>
+  <script src="js/ui.js" defer></script>
+</body>
+</html>
